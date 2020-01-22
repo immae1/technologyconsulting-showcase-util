@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>io.openliberty.tools</groupId>
+		<artifactId>liberty-maven-app-parent</artifactId>
+		<version>3.1</version>
+	</parent>
+
+
+
+	<groupId>de.novatec.showcase</groupId>
+	<artifactId>showcase-util</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>ShowcaseAll</name>
+	<description>Project for deployment of all ear files of the showcase</description>
+
+	<properties>
+		<shared.resource.dir>${project.build.directory}/liberty/wlp/usr/shared/resources</shared.resource.dir>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Liberty configuration -->
+		<liberty.var.default.http.port>9080</liberty.var.default.http.port>
+		<liberty.var.default.https.port>9443</liberty.var.default.https.port>
+
+		<username.manufacture>admin</username.manufacture>
+		<password.manufacture>adminpwd</password.manufacture>
+		<username.supplier>orderer</username.supplier>
+		<password.supplier>pwd</password.supplier>
+
+	</properties>
+	
+	<dependencies>
+		<dependency>
+			<groupId>de.novatec.showcase</groupId>
+			<artifactId>orderdomainEAR</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ear</type>
+		</dependency>
+		<dependency>
+			<groupId>de.novatec.showcase</groupId>
+			<artifactId>manufacturedomainEAR</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ear</type>
+		</dependency>
+		<dependency>
+			<groupId>de.novatec.showcase</groupId>
+			<artifactId>supplierdomainEAR</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>ear</type>
+		</dependency>
+	
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>io.openliberty.tools</groupId>
+				<artifactId>liberty-maven-plugin</artifactId>
+				<!-- see https://github.com/OpenLiberty/ci.common/issues/110 -->
+				<!-- <version>3.2-SNAPSHOT</version> -->
+				<configuration>
+					<assemblyArtifact>
+						<groupId>io.openliberty</groupId>
+						<artifactId>openliberty-runtime</artifactId>
+						<version>RELEASE</version>
+						<type>zip</type>
+					</assemblyArtifact>
+					<serverName>Showcase-Server</serverName>
+					<stripVersion>true</stripVersion>
+					<configDirectory>resources/liberty/config</configDirectory>
+					<deployPackages>dependencies</deployPackages>
+					<bootstrapProperties>
+						<default.http.port>${liberty.var.default.http.port}</default.http.port>
+						<default.https.port>${liberty.var.default.https.port}</default.https.port>
+						<!-- needed to access via System.getProperty call in WorkOrderScheduler -->
+						<http.port.manufacture>${liberty.var.default.http.port}</http.port.manufacture>
+						<username.manufacture>${username.manufacture}</username.manufacture>
+						<password.manufacture>${password.manufacture}</password.manufacture>
+						<http.port.supplier>${liberty.var.default.http.port}</http.port.supplier>
+						<username.supplier>${username.supplier}</username.supplier>
+						<password.supplier>${password.supplier}</password.supplier>
+					</bootstrapProperties>
+				</configuration>
+				<executions>
+					<execution>
+						<id>package-server</id>
+						<configuration>
+							<outputDirectory>target/wlp-package</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+				<!-- <dependencies> -->
+				<!-- <dependency> -->
+				<!-- <groupId>io.openliberty.tools</groupId> -->
+				<!-- <artifactId>ci.common</artifactId> -->
+				<!-- <version>1.8-SNAPSHOT</version> -->
+				<!-- </dependency> -->
+				<!-- </dependencies> -->
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${shared.resource.dir}/h2</outputDirectory>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.h2database</groupId>
+									<artifactId>h2</artifactId>
+									<version>1.4.200</version>
+									<type>jar</type>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+
+</project>
