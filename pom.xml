@@ -21,13 +21,27 @@
 		<shared.resource.dir>${project.build.directory}/liberty/wlp/usr/shared/resources</shared.resource.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- Liberty configuration -->
-		<liberty.var.default.http.port>9080</liberty.var.default.http.port>
-		<liberty.var.default.https.port>9443</liberty.var.default.https.port>
+		<liberty.env.HTTP_PORT>9080</liberty.env.HTTP_PORT>
+		<liberty.env.HTTPS_PORT>9443</liberty.env.HTTPS_PORT>
+		<liberty.env.SUPPLIER_PURCHASE_URL>http://localhost:${liberty.env.HTTP_PORT}/supplierdomain/supplier/purchase/</liberty.env.SUPPLIER_PURCHASE_URL>
+		<liberty.env.SUPPLIER_USER>orderer</liberty.env.SUPPLIER_USER>
+		<liberty.env.SUPPLIER_PASSWORD>pwd</liberty.env.SUPPLIER_PASSWORD>
+		<liberty.env.MANUFACTURE_WORKORDER_URL>http://localhost:${liberty.env.HTTP_PORT}/manufacturedomain/workorder/</liberty.env.MANUFACTURE_WORKORDER_URL>
+		<liberty.env.MANUFACTURE_DELIVER_URL>http://localhost:${liberty.env.HTTP_PORT}/manufacturedomain/component/deliver/</liberty.env.MANUFACTURE_DELIVER_URL>
+		<liberty.env.MANUFACTURE_USER>admin</liberty.env.MANUFACTURE_USER>
+		<liberty.env.MANUFACTURE_PASSWORD>adminpwd</liberty.env.MANUFACTURE_PASSWORD>
 
-		<username.manufacture>admin</username.manufacture>
-		<password.manufacture>adminpwd</password.manufacture>
-		<username.supplier>orderer</username.supplier>
-		<password.supplier>pwd</password.supplier>
+
+
+
+
+<!-- 		<liberty.var.default.http.port>9080</liberty.var.default.http.port> -->
+<!-- 		<liberty.var.default.https.port>9443</liberty.var.default.https.port> -->
+
+<!-- 		<username.manufacture>admin</username.manufacture> -->
+<!-- 		<password.manufacture>adminpwd</password.manufacture> -->
+<!-- 		<username.supplier>orderer</username.supplier> -->
+<!-- 		<password.supplier>pwd</password.supplier> -->
 
 	</properties>
 	
@@ -71,17 +85,17 @@
 					<stripVersion>true</stripVersion>
 					<configDirectory>resources/liberty/config</configDirectory>
 					<deployPackages>dependencies</deployPackages>
-					<bootstrapProperties>
-						<default.http.port>${liberty.var.default.http.port}</default.http.port>
-						<default.https.port>${liberty.var.default.https.port}</default.https.port>
-						<!-- needed to access via System.getProperty call in WorkOrderScheduler -->
-						<http.port.manufacture>${liberty.var.default.http.port}</http.port.manufacture>
-						<username.manufacture>${username.manufacture}</username.manufacture>
-						<password.manufacture>${password.manufacture}</password.manufacture>
-						<http.port.supplier>${liberty.var.default.http.port}</http.port.supplier>
-						<username.supplier>${username.supplier}</username.supplier>
-						<password.supplier>${password.supplier}</password.supplier>
-					</bootstrapProperties>
+<!-- 					<bootstrapProperties> -->
+<!-- 						<default.http.port>${liberty.var.default.http.port}</default.http.port> -->
+<!-- 						<default.https.port>${liberty.var.default.https.port}</default.https.port> -->
+<!-- 						needed to access via System.getProperty call in WorkOrderScheduler -->
+<!-- 						<http.port.manufacture>${liberty.var.default.http.port}</http.port.manufacture> -->
+<!-- 						<username.manufacture>${username.manufacture}</username.manufacture> -->
+<!-- 						<password.manufacture>${password.manufacture}</password.manufacture> -->
+<!-- 						<http.port.supplier>${liberty.var.default.http.port}</http.port.supplier> -->
+<!-- 						<username.supplier>${username.supplier}</username.supplier> -->
+<!-- 						<password.supplier>${password.supplier}</password.supplier> -->
+<!-- 					</bootstrapProperties> -->
 				</configuration>
 				<executions>
 					<execution>
