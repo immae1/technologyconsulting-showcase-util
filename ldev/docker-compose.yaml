@@ -1,0 +1,54 @@
+version: "3.5"
+
+services:
+
+  manufacturedomain:
+    image: novatec/technologyconsulting-showcase-manufacturedomain:latestlocal
+    hostname: manufacturedomain
+    container_name: manufacturedomain
+    environment:
+      HTTP_PORT: 9080
+      HTTPS_PORT: 9443
+      SUPPLIER_PURCHASE_URL: http://supplierdomain:9080/supplierdomain/supplier/purchase/
+      SUPPLIER_USER: order
+      SUPPLIER_PASSWORD: pwd
+    ports:
+      - 9080:9080
+    networks:
+      - novatectcshowcase
+
+  orderdomain:
+    image: novatec/technologyconsulting-showcase-orderdomain:latestlocal
+    hostname: orderdomain
+    container_name: orderdomain
+    environment:
+      HTTP_PORT: 9080
+      HTTPS_PORT: 9443
+      MANUFACTURE_WORKORDER_URL: http://manufacturedomain:9080/manufacturedomain/workorder/
+      MANUFACTURE_USER: admin
+      MANUFACTURE_PASSWORD: adminpwd
+    ports:
+      - 9081:9080
+    networks:
+      - novatectcshowcase
+
+  supplierdomain:
+    image: novatec/technologyconsulting-showcase-supplierdomain:latestlocal
+    hostname: supplierdomain
+    container_name: supplierdomain
+    environment:
+      HTTP_PORT: 9080
+      HTTPS_PORT: 9443
+      MANUFACTURE_DELIVER_URL: http://manufacturedomain:9080/manufacturedomain/component/deliver/
+      MANUFACTURE_USER: admin
+      MANUFACTURE_PASSWORD: adminpwd
+    ports:
+      - 9082:9080
+    networks:
+      - novatectcshowcase
+
+networks:
+  novatectcshowcase:
+      driver: bridge
+      name: novatectcshowcase
+
