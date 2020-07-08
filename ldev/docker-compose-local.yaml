@@ -3,7 +3,10 @@ version: "3.5"
 services:
 
   manufacturedomain:
-    image: novatec/technologyconsulting-showcase-manufacturedomain:latest
+    build: 
+      context: $PWDMANUFACTURE
+      dockerfile: Dockerfile
+    image: novatec/technologyconsulting-showcase-manufacturedomain:latestlocal
     hostname: manufacturedomain
     container_name: manufacturedomain
     environment:
@@ -18,7 +21,10 @@ services:
       - novatectcshowcase
 
   orderdomain:
-    image: novatec/technologyconsulting-showcase-orderdomain:latest
+    build: 
+      context: $PWDORDER
+      dockerfile: Dockerfile
+    image: novatec/technologyconsulting-showcase-orderdomain:latestlocal
     hostname: orderdomain
     container_name: orderdomain
     environment:
@@ -33,7 +39,10 @@ services:
       - novatectcshowcase
 
   supplierdomain:
-    image: novatec/technologyconsulting-showcase-supplierdomain:latest
+    build: 
+      context: $PWDSUPPLIER
+      dockerfile: Dockerfile
+    image: novatec/technologyconsulting-showcase-supplierdomain:latestlocal
     hostname: supplierdomain
     container_name: supplierdomain
     environment:

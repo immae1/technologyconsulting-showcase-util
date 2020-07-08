@@ -23,3 +23,33 @@ Be aware that the corresponding domain objects have to exist for a call otherwie
 
 ## openAPI
 check [openAPI](http://localhost:9080/api/explorer/) if the server is running for the full API of all three domains
+
+# docker-compose
+if you want to build the images local use in the ldev folder
+`docker-compose -f docker-compose-local.yaml up`
+make sure you have all 3 repos in a parent folder like this:
+immi-tc-showcase/
+├── technologyconsulting-showcase-manufacturedomain
+│   ├── build.sh
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── resources
+│   └── src
+├── technologyconsulting-showcase-orderdomain
+│   ├── build.sh
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── resources
+│   └── src
+├── technologyconsulting-showcase-supplierdomain
+│   ├── build.sh
+│   ├── Dockerfile
+│   ├── README.md
+│   ├── resources
+│   ├── src
+│   └── supplierdomainWAR
+└── technologyconsulting-showcase-util
+    ├── ldev
+    ├── pom.xml
+    ├── README.md
+    └── resources
