@@ -10,7 +10,7 @@ services:
       HTTP_PORT: 9080
       HTTPS_PORT: 9443
       SUPPLIER_PURCHASE_URL: http://supplierdomain:9080/supplierdomain/supplier/purchase/
-      SUPPLIER_USER: order
+      SUPPLIER_USER: orderer
       SUPPLIER_PASSWORD: pwd
     ports:
       - 9080:9080
