@@ -7,7 +7,7 @@ services:
     hostname: manufacturedomain
     container_name: manufacturedomain
     volumes:
-      - ../resources/liberty/config/manufacturedomain.xml:/opt/ol/wlp/usr/servers/defaultServer/server.xml
+      - ../resources/liberty/config/server.xml:/opt/ol/wlp/usr/servers/defaultServer/server.xml
     environment:
       HTTP_PORT: 9080
       HTTPS_PORT: 9443
@@ -24,7 +24,7 @@ services:
     hostname: orderdomain
     container_name: orderdomain
     volumes:
-      - ../resources/liberty/config/orderdomain.xml:/opt/ol/wlp/usr/servers/defaultServer/server.xml
+      - ../resources/liberty/config/server.xml:/opt/ol/wlp/usr/servers/defaultServer/server.xml
     environment:
       HTTP_PORT: 9080
       HTTPS_PORT: 9443
@@ -41,7 +41,7 @@ services:
     hostname: supplierdomain
     container_name: supplierdomain
     volumes:
-      - ../resources/liberty/config/supplierdomain.xml:/opt/ol/wlp/usr/servers/defaultServer/server.xml
+      - ../resources/liberty/config/server.xml:/opt/ol/wlp/usr/servers/defaultServer/server.xml
     environment:
       HTTP_PORT: 9080
       HTTPS_PORT: 9443

@@ -15,26 +15,26 @@
 		type="PKCS12"
 		password="Liberty" />
 
-	<jdbcDriver id="H2Driver"
-		javax.sql.DataSource="org.h2.jdbcx.JdbcDataSource" libraryRef="h2-lib" />
-	<library id="h2-lib">
-		<fileset dir="${shared.resource.dir}/h2"
-			includes="h2-1.4.200.jar" />
+	<jdbcDriver id="PostgreSQLDriver"
+		javax.sql.XADataSource="org.postgresql.xa.PGXADataSource" javax.sql.ConnectionPoolDataSource="org.postgresql.ds.PGConnectionPoolDataSource" libraryRef="postgresql-lib" />
+	<library id="postgresql-lib">
+		<fileset dir="${shared.resource.dir}/postgresql"
+			includes="postgresql-42.2.14.jar" />
 	</library>
 
-	<dataSource id="h2-db1" jndiName="jdbc/order_db"
-		type="javax.sql.DataSource" jdbcDriverRef="H2Driver">
-		<properties	url="jdbc:h2:mem:order_db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;TRACE_LEVEL_FILE=4" />
+	<dataSource id="postgresql-db1" jndiName="jdbc/order_db"
+		type="javax.sql.ConnectionPoolDataSource" transactional="true" jdbcDriverRef="PostgreSQLDriver">
+		<properties	serverName="postgresdb" portNumber="5432" databaseName="order_db" user="order_user" password="order_pass" />
 	</dataSource>
 
-	<dataSource id="h2-db2" jndiName="jdbc/manufacture_db"
-		type="javax.sql.DataSource" jdbcDriverRef="H2Driver">
-		<properties	url="jdbc:h2:mem:manufacture_db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;TRACE_LEVEL_FILE=4" />
+	<dataSource id="postgresql-db2" jndiName="jdbc/manufacture_db"
+		type="javax.sql.ConnectionPoolDataSource" transactional="true" jdbcDriverRef="PostgreSQLDriver">
+		<properties	serverName="postgresdb" portNumber="5432" databaseName="manufacture_db" user="manufacture_user" password="manufacture_pass" />
 	</dataSource>
 
-	<dataSource id="h2-db3" jndiName="jdbc/supplier_db"
-		type="javax.sql.DataSource" jdbcDriverRef="H2Driver">
-		<properties	url="jdbc:h2:mem:supplier_db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;TRACE_LEVEL_FILE=4" />
+	<dataSource id="postgresql-db3" jndiName="jdbc/supplier_db"
+		type="javax.sql.ConnectionPoolDataSource" transactional="true" jdbcDriverRef="PostgreSQLDriver">
+		<properties	serverName="postgresdb" portNumber="5432" databaseName="supplier_db" user="supplier_user" password="supplier_pass" />
 	</dataSource>
 
     <jndiEntry jndiName="manufacturedomain.workorder.url" value="${env.MANUFACTURE_WORKORDER_URL}"/>
