@@ -47,6 +47,20 @@ services:
     networks:
       - novatectcshowcase
 
+  postgresdb:
+    image: postgres:latest
+    hostname: postgresdb
+    container_name: postgresdb
+    volumes:
+      - ./postgres-init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
+    ports:
+      - 5432:5432
+    networks:
+      - novatectcshowcase
+    environment:
+      - POSTGRES_PASSWORD=pgadminpwd
+    shm_size: 256M
+
 networks:
   novatectcshowcase:
       driver: bridge
