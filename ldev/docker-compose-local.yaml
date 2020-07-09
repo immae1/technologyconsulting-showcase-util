@@ -9,6 +9,8 @@ services:
     image: novatec/technologyconsulting-showcase-manufacturedomain:latestlocal
     hostname: manufacturedomain
     container_name: manufacturedomain
+    volumes:
+      - $VOLUMEPATH:/opt/ol/wlp/usr/servers/defaultServer/server.xml
     environment:
       HTTP_PORT: 9080
       HTTPS_PORT: 9443
@@ -27,6 +29,8 @@ services:
     image: novatec/technologyconsulting-showcase-orderdomain:latestlocal
     hostname: orderdomain
     container_name: orderdomain
+    volumes:
+      - $VOLUMEPATH:/opt/ol/wlp/usr/servers/defaultServer/server.xml
     environment:
       HTTP_PORT: 9080
       HTTPS_PORT: 9443
@@ -45,6 +49,8 @@ services:
     image: novatec/technologyconsulting-showcase-supplierdomain:latestlocal
     hostname: supplierdomain
     container_name: supplierdomain
+    volumes:
+      - $VOLUMEPATH:/opt/ol/wlp/usr/servers/defaultServer/server.xml
     environment:
       HTTP_PORT: 9080
       HTTPS_PORT: 9443

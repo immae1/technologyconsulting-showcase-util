@@ -26,8 +26,8 @@ check [openAPI](http://localhost:9080/api/explorer/) if the server is running fo
 
 # docker-compose
 if you want to build the images local use in the ldev folder
-`docker-compose -f docker-compose-local.yaml up`
-make sure you have all 3 repos in a parent folder like this:
+`docker-compose -f docker-compose-local.yaml up --build` and if neccassary adjust the pathes in .env file!
+make sure you have all 3 repos in a parent folder like this.
 immi-tc-showcase/
 ├── technologyconsulting-showcase-manufacturedomain
 │   ├── build.sh
